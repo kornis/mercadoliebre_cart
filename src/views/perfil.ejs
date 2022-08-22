@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+       <!-- Include Head -->
+<%- include('partials/head', {title: 'Inicio'}) %>
+<body>
+	<!-- Header -->
+	<%- include('partials/headerNavbar') %>
+	<!-- /Header -->
+	
+	<!-- Banner -->
+	<div class="banner"></div>
+        <main class="login">
+            <h1>Bienvenido <%= user.email %>!!!</h1>
+            <img src="/images/avatars/<%= user.avatar %>" style="width: 150px ;" alt="">
+        </main>
+        <!-- footer -->
+	<%- include('partials/footer') %>
+	<!-- /footer -->
+    </body>
+</html>

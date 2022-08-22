@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+       <!-- Include Head -->
+<%- include('partials/head', {title: 'Inicio'}) %>
+<body>
+	<!-- Header -->
+	<%- include('partials/headerNavbar') %>
+	<!-- /Header -->
+	
+	<!-- Banner -->
+	<div class="banner"></div>
+        <main class="login">
+            <form action="/login" method="POST" class="form">
+                <input type="email" name="email" placeholder="Email">
+                <input type="password" name="password" placeholder="Elegí tu contraseña">
+                <input type="submit" value="Enviar">
+            </form>
+        </main>
+       <!-- footer -->
+	<%- include('partials/footer') %>
+	<!-- /footer -->
+    </body>
+</html>

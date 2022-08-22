@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+   <!-- Include Head -->
+<%- include('partials/head', {title: 'Inicio'}) %>
+<body>
+	<!-- Header -->
+	<%- include('partials/headerNavbar') %>
+	<!-- /Header -->
+	
+	<!-- Banner -->
+	<div class="banner"></div>
+        <main class="register">
+            <form action="/registro" method="POST" class="form">
+
+                <input type="email" name="email" placeholder="E-mail">
+                <br>
+                
+                <h4>Elegí tu foto de usuario</h4>
+                <input type="file" name="avatar">
+                <br>
+                <br>
+                <input type="password" name="password" placeholder="Elegí tu contraseña">
+                <input type="password" name="pass_confirm" placeholder="Confirmá tu contraseña">
+                <br>
+                <br>
+                <input type="submit" value="Enviar">
+                <input type="reset" value="Borrar">
+                <br>
+                <br>
+            </form>
+        </main>
+        <!-- footer -->
+	<%- include('partials/footer') %>
+	<!-- /footer -->
+    </body>
+</html>
