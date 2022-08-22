@@ -11,5 +11,6 @@ router.get('/cart/:id', productController.addToCart);
 router.get('/borrar-imagen/:id', productController.deleteImage);
 router.get('/:id', productController.editForm);
 router.post('/:id', upload.any(), productController.edit);
+router.get('/detalle/:id', productController.productDetail);
 
 module.exports = router;

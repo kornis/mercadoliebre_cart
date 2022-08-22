@@ -10,18 +10,18 @@
 	<!-- Banner -->
 	<div class="banner"></div>
         <main class="login">
-            <% for(let i = 0; i < cart.length; i++){ %>
+            <% for(let i = 0; i < cart.products.length; i++){ %>
                 <div class="col-12 col-sm-6 col-lg-3">
     
                     <section class="product-box">
                         
-                            <a href="/products/detail/<%= cart[i].id %> >">
+                            <a href="/products/detail/<%= cart.products[i].id %> >">
                                 <figure class="product-box_image">
-                                    <img src="/images/products/<%= cart[i].images[0].path %>" alt="imagen de producto">
+                                    <img src="/images/products/<%= cart.products[i].images[0].path %>" alt="imagen de producto">
                                 </figure>
                                 <article class="product-box_data">
-                                    <h2><%= cart[i].price %></h2>
-                                    <p><%= cart[i].title %></p>
+                                    <h2><%= cart.products[i].price %></h2>
+                                    <p><%= cart.products[i].title %></p>
                                     <i class="fas fa-truck"></i>
                                 </article>
                             </a>
