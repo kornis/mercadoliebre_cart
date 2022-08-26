@@ -5,6 +5,7 @@ module.exports = {
         return res.render('login');
     },
     login: async (req, res) => {
+
         const user = await db.users.findOne({
             where: {
                 email: req.body.email
@@ -14,11 +15,14 @@ module.exports = {
         if (user && user.password == req.body.password) {
 
             let cart = user.carts.find(cart => cart.status == true)
+
             let loginData = {
                 name: user.name,
                 avatar: user.avatar,
                 id: user.id,
             };
+
+
             if (cart) {
                 loginData.id_cart = cart.id
 
@@ -29,7 +33,9 @@ module.exports = {
                 })
                 loginData.id_cart = cart.id;
             }
+
             req.session.user = loginData;
+            
             res.cookie("login", loginData, { maxAge: 9999999999999 });
             return res.redirect('/perfil')
             
@@ -93,5 +99,10 @@ module.exports = {
                     })
             })
 
+    },
+
+    logout: (req, res) => {
+        res.cookie("login", null, { maxAge: 0});
+        req.session.destroy(() => res.redirect('/'));
     }
 }

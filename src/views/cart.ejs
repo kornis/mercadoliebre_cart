@@ -1,37 +1,88 @@
 <!DOCTYPE html>
 <html>
-       <!-- Include Head -->
-<%- include('partials/head', {title: 'Inicio'}) %>
-<body>
-	<!-- Header -->
-	<%- include('partials/headerNavbar') %>
-	<!-- /Header -->
-	
-	<!-- Banner -->
-	<div class="banner"></div>
-        <main class="login">
-            <% for(let i = 0; i < cart.products.length; i++){ %>
-                <div class="col-12 col-sm-6 col-lg-3">
-    
-                    <section class="product-box">
-                        
-                            <a href="/products/detail/<%= cart.products[i].id %> >">
-                                <figure class="product-box_image">
-                                    <img src="/images/products/<%= cart.products[i].images[0].path %>" alt="imagen de producto">
-                                </figure>
-                                <article class="product-box_data">
-                                    <h2><%= cart.products[i].price %></h2>
-                                    <p><%= cart.products[i].title %></p>
-                                    <i class="fas fa-truck"></i>
-                                </article>
-                            </a>
-                            
-                        </section>
+<!-- Include Head -->
+<%- include('partials/head', {title: 'Inicio' }) %>
+
+    <body>
+        <!-- Header -->
+        <%- include('partials/headerNavbar') %>
+            <!-- /Header -->
+
+            <!-- Banner -->
+            <div class="banner"></div>
+            <main class="login">
+                <% for(let i=0; i < cart.products.length; i++){ %>
+                    <div class="cart_product_container" style="margin: 10px auto;">
+
+                        <article class="product-box_cart">
+
+
+                            <figure class="product-box_image">
+                                <img src="/images/products/<%= cart.products[i].images[0].path %>"
+                                    alt="imagen de producto" style="width: 180px">
+                            </figure>
+
+                            <article class="product-box_data_cart">
+                                <h2>
+                                    $<%= cart.products[i].price %>
+                                </h2>
+                                <p>
+                                    <%= cart.products[i].title %>
+                                </p>
+                                <input type="hidden" id="idProducto" value="<%= cart.products[i].id %>">
+                                <span>Cantidad: <input type="number" data-idproducto="<%= cart.products[i].id %>"
+                                        name="cant" class="inputCantidad"
+                                        value="<%= cart.products[i].cartProduct.cant %>">
+                                </span>
+                            </article>
+
+
+
+                        </article>
                     </div>
                     <% } %>
-        </main>
-       <!-- footer -->
-	<%- include('partials/footer') %>
-	<!-- /footer -->
+            </main>
+            <!-- footer -->
+            <%- include('partials/footer') %>
+                <!-- /footer -->
+
+                <script>
+                    // Capturamos los inputs de cantidad a comprar de cada producto en el carrito
+                    const inputCantidad = document.querySelectorAll("input.inputCantidad");
+
+                    // Recorremos los inputs para agregar la escucha del evento change
+                    inputCantidad.forEach(input => {
+                        input.addEventListener("change", async function (e) {
+
+                            // Del input actual, nos guardamos el valor almacenado en el atributo data-idProducto
+                            let idProducto = input.dataset.idproducto;
+
+                            // Configuraciones para el fetch
+                            const config = {
+                                method: "POST",
+                                body: JSON.stringify({ cant: e.target.value }),
+                                headers: {
+                                    "Content-Type": "Application/json"
+                                }
+                            }
+
+                            // Fetch para realizar el cambio de cantidad de productos en el carrito
+                            const response = await fetch("http://localhost:3000/products/api/cart/" + idProducto, config)
+
+                            const data = response.json();
+                            // Si no se pudo realizar el cambio, realizamos alguna acción.
+                            if (!response.status == 201) {
+                                // mostramos mensaje de error
+                                console.log("response", response)
+                            } else {
+                                if(input.value == 0){
+                                    // Si la respuesta fue correcta y el value del input era cero, eliminamos el producto de la pantalla sin refrescar
+                                    input.parentNode.parentNode.parentNode.parentNode.remove()
+                                }
+                            }
+                        })
+                    })
+                </script>
     </body>
+
 </html>
