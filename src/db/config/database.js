@@ -18,10 +18,11 @@ module.exports = {
   },
   "production": {
     "username": "root",
-    "password": null,
-    "database": "database_production",
-    "host": "127.0.0.1",
+    "password": "nlMiLFyiK0LnP9QialSI",
+    "database": "railway",
+    "host": "containers-us-west-76.railway.app",
     "dialect": "mysql",
+    "port": 6156,
     "operatorsAliases": false
   }
 }

@@ -1,42 +1,55 @@
-SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-START TRANSACTION;
-SET time_zone = "+00:00";
-
-/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
-/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
-/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8mb4 */;
-
-CREATE DATABASE IF NOT EXISTS 'prueba_sequelize';
-use 'prueba_sequelize';
 
 CREATE TABLE `cart` (
-  `id` bigint(20) UNSIGNED NOT NULL,
-  `id_user` bigint(20) UNSIGNED NOT NULL,
-  `status` tinyint(3) UNSIGNED NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
-INSERT INTO `cart` (`id`, `id_user`, `status`) VALUES
-(1, 17, 0),
-(2, 17, 1);
-
-CREATE TABLE `cart_product` (
-  `id` bigint(20) UNSIGNED NOT NULL,
-  `id_product` bigint(20) UNSIGNED NOT NULL,
-  `id_cart` int(10) UNSIGNED NOT NULL,
-  `cant` int(10) UNSIGNED NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
-INSERT INTO `cart_product` (`id`, `id_product`, `id_cart`, `cant`) VALUES
-(8, 21, 2, 11),
-(9, 22, 2, 9),
-(10, 23, 2, 3);
+  `id` int(20) UNSIGNED NOT NULL,
+  `id_user` int(20) UNSIGNED NOT NULL,
+  `status` int(3) UNSIGNED NOT NULL
+) ;
 
 CREATE TABLE `images` (
-  `id` bigint(20) NOT NULL,
-  `path` varchar(250) NOT NULL,
-  `id_product` bigint(20) UNSIGNED NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+  `id` int(20) NOT NULL,
+  `path` text(250) NOT NULL,
+  `id_product` int(20) UNSIGNED NOT NULL
+) ;
+
+CREATE TABLE `users` (
+  `id` int(20) UNSIGNED NOT NULL,
+  `email` text(100) NOT NULL,
+  `password` text(250) NOT NULL,
+  `avatar` text(250) NOT NULL,
+  `id_imagen` int(20) DEFAULT NULL
+) ;
+
+CREATE TABLE `cart_product` (
+  `id` int(20) UNSIGNED NOT NULL,
+  `id_product` int(20) UNSIGNED NOT NULL,
+  `id_cart` int(10) UNSIGNED NOT NULL,
+  `cant` int(10) UNSIGNED NOT NULL
+) ;
+
+
+CREATE TABLE `cart_product` (
+  `id` int(20) UNSIGNED NOT NULL,
+  `id_product` int(20) UNSIGNED NOT NULL,
+  `id_cart` int(10) UNSIGNED NOT NULL,
+  `cant` int(10) UNSIGNED NOT NULL
+) ;
+
+
+CREATE TABLE `products` (
+  `id` int(20) UNSIGNED NOT NULL,
+  `title` text(150) NOT NULL,
+  `description` text NOT NULL,
+  `price` decimal(10,0) NOT NULL
+) ;
+
+
+
+INSERT INTO `users` (`id`, `email`, `password`, `avatar`, `id_imagen`) VALUES
+(17, 'fede@fede.com', '123456', 'avatar - 1615503954122.jpg', 37);
+
+
+
+
 
 INSERT INTO `images` (`id`, `path`, `id_product`) VALUES
 (44, 'images - 1615509685428.jpg', 21),
@@ -45,28 +58,24 @@ INSERT INTO `images` (`id`, `path`, `id_product`) VALUES
 (48, 'images - 1615673836701.jpg', 22),
 (49, 'images - 1615673897473.jpg', 23);
 
-CREATE TABLE `products` (
-  `id` bigint(20) UNSIGNED NOT NULL,
-  `title` varchar(150) NOT NULL,
-  `description` text NOT NULL,
-  `price` decimal(10,0) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 INSERT INTO `products` (`id`, `title`, `description`, `price`) VALUES
 (21, 'telefono celular 2', 'celular samsung 2', '15000'),
 (22, 'parlante nuevo', 'asdasdasda', '1000'),
 (23, 'cafetera', 'asdasdasda', '1000');
 
-CREATE TABLE `users` (
-  `id` bigint(20) UNSIGNED NOT NULL,
-  `email` varchar(100) NOT NULL,
-  `password` varchar(250) NOT NULL,
-  `avatar` varchar(250) NOT NULL,
-  `id_imagen` bigint(20) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
-INSERT INTO `users` (`id`, `email`, `password`, `avatar`, `id_imagen`) VALUES
-(17, 'fede@fede.com', '123456', 'avatar - 1615503954122.jpg', 37);
+
+
+
+INSERT INTO `cart` (`id`, `id_user`, `status`) VALUES
+(1, 17, 0),
+(2, 17, 1);
+
+INSERT INTO `cart_product` (`id`, `id_product`, `id_cart`, `cant`) VALUES
+(8, 21, 2, 11),
+(9, 22, 2, 9),
+(10, 23, 2, 3);
 
 
 ALTER TABLE `cart`
@@ -87,19 +96,19 @@ ALTER TABLE `users`
 
 
 ALTER TABLE `cart`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 ALTER TABLE `cart_product`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` int(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 ALTER TABLE `images`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=50;
+  MODIFY `id` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=50;
 
 ALTER TABLE `products`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
+  MODIFY `id` int(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
 
 ALTER TABLE `users`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `id` int(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 
 ALTER TABLE `users`
