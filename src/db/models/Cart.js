@@ -15,6 +15,7 @@ module.exports = (sequelize, DataTypes) => {
 
     Cart.associate = models => {
         Cart.belongsToMany(models.products, {
+
             foreignKey: "id_cart",
             otherKey: 'id_product',
             // hacemos la relación llamando al modelo creado de la tabla intermedia para poder obtener el campo extra

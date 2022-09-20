@@ -1,5 +1,6 @@
 const db = require("../db/models");
 
+
 module.exports = {
     addToCart: (req, res) => {
 
@@ -12,6 +13,8 @@ module.exports = {
 
                 // Del carrito encontrado, buscamos si existe ya el producto a agregar
                 let product_found = cart.products.find(p => p.id == product_id)
+
+
                 if (req.body.cant == 0) {
                     db.cartProduct.destroy({
                         where: {

@@ -1,5 +1,5 @@
 const db = require('../db/models');
-
+const { QueryTypes } = require("sequelize")
 module.exports = {
     /**
      * @desc Muestra la vista de Listado de productos
@@ -7,8 +7,14 @@ module.exports = {
      */
     index: (req, res) => {
 
+/*         db.sequelize.query("select * from products", {type: QueryTypes.SELECT })
+        .then(function(result) {
+            return res.json(result);
+        }) */
+
+
         // Buscamos en la DB todos los productos
-        db.products.findAll({
+         db.products.findAll({
 
             // Incluimos la relación de imagenes
             include: [db.images]
@@ -17,7 +23,7 @@ module.exports = {
             // Retornamos la vista de productos enviando el listado de productos 
             return res.render('index', { products })
         })
-
+ 
     },
 
     productDetail: (req, res) => {
@@ -158,7 +164,7 @@ module.exports = {
             .then(() => res.redirect('/products/' + req.query.product))
     },
 
-    /**
+/**
  * 
  * @desc Agrega un nuevo producto al carrito o actualiza el mismo
  * 

@@ -35,10 +35,10 @@ module.exports = {
             }
 
             req.session.user = loginData;
-            
+
             res.cookie("login", loginData, { maxAge: 9999999999999 });
             return res.redirect('/perfil')
-            
+
         } else {
             return res.send('El usuario y/o contraseña son incorrectos...')
         }
@@ -102,7 +102,7 @@ module.exports = {
     },
 
     logout: (req, res) => {
-        res.cookie("login", null, { maxAge: 0});
+        res.cookie("login", null, { maxAge: 0 });
         req.session.destroy(() => res.redirect('/'));
     }
 }

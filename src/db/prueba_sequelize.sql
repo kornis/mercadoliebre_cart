@@ -39,9 +39,6 @@ CREATE TABLE `images` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 INSERT INTO `images` (`id`, `path`, `id_product`) VALUES
-(37, 'avatar - 1615503954122.jpg', 0),
-(42, 'images - 1615509559443.jpg', 0),
-(43, 'images - 1615509559448.jpg', 0),
 (44, 'images - 1615509685428.jpg', 21),
 (46, 'images - 1615512648103.jpg', 21),
 (47, 'images - 1615512648110.jpg', 21),
